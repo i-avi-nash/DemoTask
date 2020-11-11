@@ -35,6 +35,18 @@ namespace DemoTask.Controllers
             return NotFound();
         }
 
+        // GET api/employee/{id}
+        [HttpGet("{id}/Address&Name", Name = "GetEmployeeNameAndAddressById")]
+        public ActionResult<Employee> GetEmployeeNameAndAddressById(int id)
+        {
+            var employee = _context.Employees.FirstOrDefault(e => e.Id == id);
+            if (employee != null)
+            {
+                return Ok(new { Name = employee.Name, Address = employee.Address });
+            }
+            return NotFound();
+        }
+
         // POST api/employee
         [HttpPost]
         public ActionResult<Employee> CreateEmployee(Employee employee)
